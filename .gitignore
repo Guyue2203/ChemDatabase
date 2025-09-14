@@ -1,0 +1,16 @@
+# Python 缓存文件
+__pycache__/
+.pytest_cache/
+
+# Django 数据库文件
+db.sqlite3
+
+# IDE 文件
+.vs/
+.idea/
+
+.venv/
+
+
+# 化学数据文件
+media/

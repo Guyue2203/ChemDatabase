@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模糊搜索数据</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://img.51miz.com/Element/00/81/19/43/63187c84_E811943_c41a1154.jpg');
+      opacity: 0.8;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      color: #102b6a;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 10px 15px;
+      text-align: left;
+    }
+    th {
+      font-size: 19px; /* 设置表头文字大小为 18 像素，可根据需求调整数值 */
+      font-weight: bold; /* 设置表头文字加粗 */
+    }
+    caption {
+      font-size: 26px; /* 增大标题字号 */
+      font-weight: bold; /* 加粗标题文字 */
+      margin-bottom: 10px; /* 为标题添加底部外边距，使布局更美观 */
+    }
+  </style>
+
+</head>
+<body>
+<div style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+
+      <table  id="pageListTable">
+            <caption>模糊搜索数据</caption>
+            <tbody id="pageListTableBody">
+            {% if message %}
+                {% for row in message %}
+                    <tr>
+                        <td style="text-align: center;"><img src="http://127.0.0.1:8000/media/{{ row.photo }}" alt="Big Boat" width="150" height="120" ></td>
+                        <td style="text-align: center;">{{row.Molecular_Formla }}</td>
+                        <td style="text-align: center;"><a href ="http://127.0.0.1:8000/Chemai_data/Search_Chem_Database/Search_sm/{{row.InchIkey}}/" |safe> {{ row.InchIkey}}</a></td>
+                        <td style="text-align: center;"><a href ="http://127.0.0.1:8000/Chemai_data/Search_Chem_Database/Search_de/{{row.InchIkey}}/" |safe target="_blank" > 更多信息</a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td style="text-align: center;">No 模糊搜索数据 are available.</td>
+                </tr>
+            {% endif %}
+            </tbody>
+      </table>
+    <div id="pages" style="float: right;">
+   <span id="spanFirst">首页</span>
+    <span id="spanPre">上一页</span>
+    <span id="spanNext">下一页</span>
+    <span id="spanLast">尾页</span>
+    第<strong id="spanPageNum"></strong>页/共
+    <strong id="spanTotalPage"></strong>页 </div>
+    </div>
+
+</div>
+
+    <!-- JavaScript 代码实现 功能 -->
+    <script>
+	var theUL = document.getElementById("pageListTableBody");
+    var totalPage = document.getElementById("spanTotalPage");
+    var pageNum = document.getElementById("spanPageNum"); //获取当前页<span>
+    var spanPre = document.getElementById("spanPre"); //获取上一页<span>
+    var spanNext = document.getElementById("spanNext"); //获取下一页<span>
+    var spanFirst = document.getElementById("spanFirst"); //获取第一页<span>
+    var spanLast = document.getElementById("spanLast"); //获取最后一页<span>
+    var numberRowsInTable = theUL.getElementsByTagName("tr").length; //记录总条数
+    var pageSize = 10; //每页显示的记录条数
+    var page = 1; //当前页，默认第一页
+
+    //下一页
+    function next(){
+        hideTable();
+        currentRow = pageSize * page;
+        maxRow = currentRow + pageSize;
+        if ( maxRow > numberRowsInTable ) maxRow = numberRowsInTable;
+        for ( var i = currentRow; i< maxRow; i++ ){
+            theUL.getElementsByTagName("tr")[i].style.display = '';
+        }
+        page++;
+        if ( maxRow == numberRowsInTable ) {
+            nextText();
+            lastText();
+        }
+        showPage();
+        preLink();
+        firstLink();
+    }
+
+    //上一页
+    function pre(){
+        hideTable();
+        page--;
+        currentRow = pageSize * page;
+        maxRow = currentRow - pageSize;
+        if ( currentRow > numberRowsInTable ) currentRow = numberRowsInTable;
+        for ( var i = maxRow; i< currentRow; i++ ){
+            theUL.getElementsByTagName("tr")[i].style.display = '';
+        }
+        if ( maxRow == 0 ){
+            preText();
+            firstText();
+        }
+        showPage();
+        nextLink();
+        lastLink();
+    }
+
+    //第一页
+    function first(){
+        hideTable();
+        page = 1;
+        for ( var i = 0; i<pageSize; i++ ){
+            theUL.getElementsByTagName("tr")[i].style.display = '';
+        }
+        showPage();
+        firstText();
+        preText();
+        nextLink();
+        lastLink();
+    }
+
+    //最后一页
+    function last(){
+        hideTable();
+        page = pageCount();
+        currentRow = pageSize * (page - 1);
+        for ( var i = currentRow; i<numberRowsInTable; i++ ){
+            theUL.getElementsByTagName("tr")[i].style.display = '';
+        }
+        showPage();
+        preLink();
+        nextText();
+        firstLink();
+        lastText();
+    }
+
+    function hideTable(){
+        for ( var i = 0; i<numberRowsInTable; i++ ){
+            theUL.getElementsByTagName("tr")[i].style.display = 'none';
+        }
+    }
+
+    function showPage(){
+        pageNum.innerHTML = page;
+    }
+
+    //总共页数
+    function pageCount(){
+        return Math.ceil(numberRowsInTable/pageSize);
+    }
+    //显示链接
+    function preLink(){
+        spanPre.innerHTML = "<a href='javascript:pre();'>上一页</a>";
+    }
+    function preText(){
+        spanPre.innerHTML = "上一页";
+    }
+    function nextLink(){
+        spanNext.innerHTML = "<a href='javascript:next();'>下一页</a>";
+    }
+    function nextText(){
+        spanNext.innerHTML = "下一页";
+    }
+    function firstLink(){
+        spanFirst.innerHTML = "<a href='javascript:first();'>首页</a>";
+    }
+    function firstText(){
+        spanFirst.innerHTML = "首页";
+    }
+    function lastLink(){
+        spanLast.innerHTML = "<a href='javascript:last();'>末页</a>";
+    }
+    function lastText(){
+        spanLast.innerHTML = "末页";
+    }
+
+    //隐藏
+    function hide(){
+        for ( var i = pageSize; i<numberRowsInTable; i++ ){
+            theUL.getElementsByTagName("tr")[i].style.display = 'none';
+        }
+        totalPage.innerHTML = pageCount();
+        pageNum.innerHTML = '1';
+        nextLink();
+        lastLink();
+    }
+    hide();
+
+    </script>
+</body>
+</html>

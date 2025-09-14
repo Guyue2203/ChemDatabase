@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JSME webpack test page</title>
+    <script type="text/javascript" language="javascript" src="http://127.0.0.1:8000/media/Chemai_data/media/jsme/jsme.nocache.js"></script>
+
+    <script type="text/javascript" language="javascript">
+
+    //this function will be called after the JavaScriptApplet code has been loaded.
+    function jsmeOnLoad() {
+    // glutathione
+    var startingStructure = "20 19 C 6.61 -7.11 C 7.82 -7.81 O 6.61 -5.71 O 5.40 -7.81 N 7.82 -9.21 C 9.03 -7.11 C 10.25 -7.81 C 11.46 -7.11 N 12.67 -7.81 O 11.46 -5.71 C 13.88 -7.11 C 15.10 -7.81 O 15.10 -9.21 N 16.31 -7.11 C 17.52 -7.81 C 18.73 -7.11 C 13.88 -5.71 O 19.94 -7.81 O 18.73 -5.71 S 15.09 -5.01 1 2 1 1 3 2 1 4 1 2 5 -2 2 6 1 6 7 1 7 8 1 8 9 1 8 10 2 9 11 1 11 12 1 12 13 2 12 14 1 14 15 1 15 16 1 11 17 -1 16 18 1 16 19 2 17 20 1";
+
+    //Instantiate a new JSME:
+    //arguments: HTML id, width, height (must be string not number!)
+
+    jsmeApplet = new JSApplet.JSME("appletContainer", "600px", "440px", {
+    //optional parameters
+    "options": "query,hydrogens,fullScreenIcon",
+    "jme": startingStructure // JME mol format
+    });
+
+
+    //Alternative method: the size is not specified: the applet will use 100% of the space of its parent container "appletContainer".
+    //Be sure that the parent container size > 0, otherwise the applet will not be visible
+
+    /*    	jsmeApplet = new JSApplet.JSME("appletContainer",  {
+    //optional parameters
+    "options" : "query,hydrogens",
+    "jme" : startingStructure
+    });
+    */
+
+
+    //Opera patch: if some applet elements are not displayed, force repaint
+    //jsmeApplet.deferredRepaint(); //the applet will be repainted after the browser event loop returns
+    //it is recommended to use it if the JSME is created outside this jsmeOnLoad() function
+
+
+    //jsmeApplet has the same API as the original Java applet
+    //One can mimic the JME Java applet access to simplify the adaptation of HTML and JavaScript code:
+    document.JME = jsmeApplet;
+
+    //suggestion
+    //all buttons that access the jsme variable were disabled in the html
+    //Now enable all buttons that can access the jsme variable since the applet is ready
+    //example:
+    document.getElementById("button").disabled=false;
+
+    document.getElementById("inchiKeyUrlTextArea").value = jsmeApplet.getWebSearchInchiKeyBaseUrl();
+    }
+
+    function getSmiles() {
+    var data = document.JME.smiles();
+    document.getElementById("jme_output").value = data;
+    }
+    </script>
+</head>
+<body>
+<h1>JSME test page</h1>
+
+<table align="center">
+    <tr>
+        <td id="appletContainer"></td>
+    </tr>
+    </tr>
+</table>
+
+<p></p>
+<p></p>
+
+<div align="center">
+    <button TYPE="button" onClick="jsmeApplet.reset()"style="padding: 10px 20px; font-size: 16px; background-color: black; color: white; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">Clear Editor</button>
+    <button type="button" onclick='getSmiles();'style="padding: 10px 20px; font-size: 16px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">Get smiles</button>
+</div>
+
+<hr>
+<p></p>
+<p></p>
+
+<table align="center">
+      <form action="/Chemai_data/Search_Chem_Database/Search/0/" method="get" target="_blank">
+           <input  type="text"id="jme_output" name="q" placeholder="输入化学分子SMILES表示..." style="padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; width: 750px;">
+           <button type="submit" id="search-btn" style="padding: 10px 20px; font-size: 16px; background-color: #2a66c7; color: white; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+           <i class="fas fa-search" style="margin-right: 10px;"></i>搜索
+           </button>
+      </form>
+</table>
+</body>
+</html>

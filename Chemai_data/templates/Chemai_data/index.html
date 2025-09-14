@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一个数据搜索网站的前端</title>
+</head>
+<body>
+
+    {% if latest_question_list %}
+        <ul>
+        {% for question in latest_question_list %}
+            <li><a href = {{ question.ans_text }} target="_blank" >{{ question.question_text}}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No newsreport are available.</p>
+    {% endif %}
+</body>
+</html>

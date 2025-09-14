@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据提交</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://bpic.588ku.com/back_pic/05/81/03/285c30a5955c44b.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.7;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h2 {
+      color: #fff;
+      background-color: #224b8f;
+      padding: 10px 20px;
+      margin-top: 100px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      background-color: white;
+      opacity: 1;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+    thead {
+      background-color: #224b8f;
+      color: white;
+    }
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 12px 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+    <form action="/Chemai_data/testdb_url/" method="get">
+        <h3>关键字     <input type="text" name="关键字"><br></h3>
+        <h3>正常沸点温度  <input type="text" name="正常沸点温度"><br></h3>
+        <h3>正常熔化温度  <input type="text" name="正常熔化温度"><br></h3>
+        <h3>化合物名称  <input type="text" name="化合物名称"><br></h3>
+        <h3>PubChem_CID  <input type="text" name="PubChem_CID"><br></h3>
+        <h3>结构  <input type="text" name="结构"><br></h3>
+        <h3>化学品安全  <input type="text" name="化学品安全"><br></h3>
+        <h3>分子式  <input type="text" name="分子式"><br></h3>
+        <h3>搜索框架  <input type="text" name="搜索框架"><br></h3>
+        <h3>分子量  <input type="text" name="分子量"><br></h3>
+        <h3>描述  <input type="text" name="描述"><br></h3>
+        <h3>IUPAC_Name  <input type="text" name="IUPAC_Name"><br></h3>
+        <h3>InChI  <input type="text" name="InChI"><br></h3>
+        <h3>InChIKey  <input type="text" name="InChIKey"><br></h3>
+        <h3>SMILES  <input type="text" name="SMILES"><br></h3>
+        <h3>分子结构式  <input type="text" name="分子结构式"><br></h3>
+        <h3>CAS  <input type="text" name="CAS"><br></h3>
+        <h3>Deprecated_CAS  <input type="text" name="Deprecated_CAS"><br></h3>
+        <h3>XLogP3  <input type="text" name="XLogP3"><br></h3>
+        <h3>氢键供体计数  <input type="text" name="氢键供体计数"><br></h3>
+        <h3>氢键受体计数  <input type="text" name="氢键受体计数"><br></h3>
+        <h3>可旋转的键数  <input type="text" name="可旋转的键数"><br></h3>
+        <h3>精确质量  <input type="text" name="精确质量"><br></h3>
+        <h3>单同位素质量  <input type="text" name="单同位素质量"><br></h3>
+        <h3>拓扑极表面积  <input type="text" name="拓扑极表面积"><br></h3>
+        <h3>重原子计数  <input type="text" name="重原子计数"><br></h3>
+        <h3>复杂性  <input type="text" name="复杂性"><br></h3>
+        <h3>同位素原子数  <input type="text" name="同位素原子数"><br></h3>
+        <h3>定义的原子立体中心计数  <input type="text" name="定义的原子立体中心计数"><br></h3>
+        <h3>未定义的原子立体中心计数  <input type="text" name="未定义的原子立体中心计数"><br></h3>
+        <h3>定义的键立体中心计数  <input type="text" name="定义的键立体中心计数"><br></h3>
+        <h3>未定义的键立体中心计数  <input type="text" name="未定义的键立体中心计数"><br></h3>
+        <h3>共价键合单位计数  <input type="text" name="共价键合单位计数"><br></h3>
+        <h3>复合词被规范化  <input type="text" name="复合词被规范化"><br></h3>
+        <h3>物理描述  <input type="text" name="物理描述"><br></h3>
+        <h3>颜色  <input type="text" name="颜色"><br></h3>
+        <h3>形状  <input type="text" name="形状 "><br></h3>
+        <h3>气味  <input type="text" name="气味"><br></h3>
+        <h3>沸点  <input type="text" name="沸点"><br></h3>
+        <h3>熔点  <input type="text" name="熔点"><br></h3>
+        <h3>闪点  <input type="text" name="闪点"><br></h3>
+        <h3>溶解度  <input type="text" name="溶解度"><br></h3>
+        <h3>密度  <input type="text" name="密度"><br></h3>
+        <h3>蒸气压  <input type="text" name="蒸气压"><br></h3>
+        <h3>数据库日志  <input type="text" name="数据库日志"><br></h3>
+        <h3>稳定性  <input type="text" name="稳定性"><br></h3>
+        <h3>保质期  <input type="text" name="保质期"><br></h3>
+        <h3>分解  <input type="text" name="分解"><br></h3>
+        <h3>解离常数  <input type="text" name="解离常数"><br></h3>
+        <h3>碰撞横截面  <input type="text" name="碰撞横截面"><br></h3>
+        <h3>Kovats_保留指数  <input type="text" name="Kovats_保留指数"><br></h3>
+        <h3>其他实验性质  <input type="text" name="其他实验性质"><br></h3>
+        <h3>SpringerMaterials_属性  <input type="text" name="SpringerMaterials_属性"><br></h3>
+        <h3>化学类别  <input type="text" name="化学类别"><br></h3>
+        <h3>药物  <input type="text" name="药物"><br></h3>
+        <h3>人用药物  <input type="text" name="人用药物 "><br></h3>
+        <h3>动物药品  <input type="text" name="动物药品"><br></h3>
+        <h3>一维核磁共振波谱  <input type="text" name="一维核磁共振波谱"><br></h3>
+        <h3>2D_NMR_波谱  <input type="text" name="2D_NMR_波谱"><br></h3>
+        <h3>质谱法  <input type="text" name="质谱法"><br></h3>
+        <h3>紫外光谱  <input type="text" name="紫外光谱"><br></h3>
+        <h3>红外光谱  <input type="text" name="红外光谱"><br></h3>
+        <h3>拉曼光谱  <input type="text" name="拉曼光谱"><br></h3>
+        <h3>其他光谱  <input type="text" name="其他光谱"><br></h3>
+        <h3>相关化合物  <input type="text" name="相关化合物"><br></h3>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>

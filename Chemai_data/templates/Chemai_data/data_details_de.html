@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>搜索结果展示</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://img.51miz.com/Element/00/81/19/43/63187c84_E811943_c41a1154.jpg');
+      opacity: 0.8;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      color: #102b6a;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 10px 15px;
+      text-align: left;
+    }
+    th {
+      font-size: 19px; /* 设置表头文字大小为 18 像素，可根据需求调整数值 */
+      font-weight: bold; /* 设置表头文字加粗 */
+    }
+    caption {
+      font-size: 26px; /* 增大标题字号 */
+      font-weight: bold; /* 加粗标题文字 */
+      margin-bottom: 10px; /* 为标题添加底部外边距，使布局更美观 */
+    }
+  </style>
+</head>
+<body>
+<div style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+        <table>
+            <caption>化学分子特性</caption>
+            <tr>
+                <td>CAS号</td>
+                <td>{{message.CAS_Registry_Number_CAS}}</td>
+            </tr>
+            <tr>
+                <td>分子名称</td>
+                <td>{{message.Molecular_Formla}}</td>
+            </tr>
+            <tr>
+                <td>化学结构</td>
+                <td><img src="http://127.0.0.1:8000/media/{{ message.photo }}" alt="Big Boat" width="150" height="120" ></td>
+            </tr>
+            <tr>
+                <td>SMILES</td>
+                <td>{{message.SMILES}}</td>
+            </tr>
+            <tr>
+                <td>同义词（搜索匹配框）</td>
+                <td>{{message.Synonyms}}</td>
+            </tr>
+            <tr>
+                <td>标准电导率</td>
+                <td>{{message.Electrical_conductivity_econd}}</td>
+            </tr>
+            <tr>
+                <td>分子量</td>
+                <td>46.07 g/mol</td>
+            </tr>
+            <tr>
+                <td>熔点</td>
+                <td>-114.1 °C</td>
+            </tr>
+            <tr>
+                <td>沸点</td>
+                <td>78.37 °C</td>
+            </tr>
+            <tr>
+                <td>密度</td>
+                <td>0.789 g/cm³（20 °C）</td>
+            </tr>
+            <tr>
+                <td>导热系数</td>
+                <td>0.625</td>
+            </tr>
+            <tr>
+                <td>化合物名称</td>
+                <td>{{message.SMILES}}</td>
+            </tr>
+            <tr>
+                <td>导热系数</td>
+                <td>45</td>
+            </tr>
+            <tr>
+                <td>化学品安全</td>
+                <td>无</td>
+            </tr>
+            <tr>
+                <td>分子量</td>
+                <td>44.6</td>
+            </tr>
+            <tr>
+                <td>分子量</td>
+                <td>48</td>
+            </tr>
+            <tr>
+                <td>描述</td>
+                <td>无</td>
+            </tr>
+            <tr>
+                <td>IUPAC名称</td>
+                <td>{{message.IUPAC_Name}}</td>
+            </tr>
+            <tr>
+                <td>InchI</td>
+                <td>{{message.InchI}}</td>
+            </tr>
+            <tr>
+                <td>InchIkey</td>
+                <td>{{message.InchIkey}}</td>
+            </tr>
+            <tr>
+                <td>分子结构式</td>
+                <td>{{message.Molecular_Structure_Formla}}</td>
+            </tr>
+            <tr>
+                <td>XLogP3</td>
+                <td>{{message.XLogP3}}</td>
+            </tr>
+            <tr>
+                <td>氢键供体计数</td>
+                <td>{{message.Hydrogen_Bond_Donor_Count}}</td>
+            </tr>
+            <tr>
+                <td>氢键受体计数</td>
+                <td>{{message.Hydrogen_Bond_Acceptor_Count}}</td>
+            </tr>
+            <tr>
+                <td>可旋转的键数</td>
+                <td>{{message.Rotatable_Bond_Count}}</td>
+            </tr>
+            <tr>
+                <td>精确质量</td>
+                <td>{{message.Exact_Mass}}</td>
+            </tr>
+            <tr>
+                <td>单同位素质量</td>
+                <td>{{message.Monoisotopic_Mass}}</td>
+            </tr>
+            <tr>
+                <td>拓扑极表面积</td>
+                <td>{{message.Topological_Polar_Surface_Area}}</td>
+            </tr>
+            <tr>
+                <td>重原子计数</td>
+                <td>{{message.Heavy_Atom_Count}}</td>
+            </tr>
+             <tr>
+                <td>复杂性</td>
+                <td>{{message.Complexity}}</td>
+            </tr>
+            <tr>
+                <td>同位素原子数</td>
+                <td>{{message.Isotope_Atom_Count}}</td>
+            </tr>
+             <tr>
+                <td>定义的原子立体中心计数</td>
+                <td>{{message.Defined_Atom_Stereocenter_Count}}</td>
+            </tr>
+            <tr>
+                <td>未定义的原子立体中心计数</td>
+                <td>{{message.Undefined_Atom_Stereocenter_Count}}</td>
+            </tr>
+             <tr>
+                <td>定义的键立体中心计数</td>
+                <td>{{message.Defined_Bond_Stereocenter_Count}}</td>
+            </tr>
+            <tr>
+                <td>未定义的键立体中心计数</td>
+                <td>{{message.Undefined_Bond_Stereocenter_Count}}</td>
+            </tr>
+             <tr>
+                <td>共价键合单位计数</td>
+                <td>{{message.Covalently_Bonded_Unit_Count}}</td>
+            </tr>
+            <tr>
+                <td>复合词被规范化</td>
+                <td>{{message.Compound_Is_Canonicalized}}</td>
+            </tr>
+             <tr>
+                <td>物理描述</td>
+                <td>{{message.Physical_Description}}</td>
+            </tr>
+            <tr>
+                <td>颜色</td>
+                <td>{{message.Color}}</td>
+            </tr>
+            <tr>
+                <td>形状</td>
+                <td>{{message.Form}}</td>
+            </tr>
+            <tr>
+                <td>气味</td>
+                <td>{{message.Odor}}</td>
+            </tr>
+            <tr>
+                <td>沸点</td>
+                <td>{{message.Boiling_Point}}</td>
+            </tr>
+            <tr>
+                <td>熔点</td>
+                <td>{{message.Melting_Pointnt}}</td>
+            </tr>
+            <tr>
+                <td>闪点</td>
+                <td>{{message.Flash_Point}}</td>
+            </tr>
+            <tr>
+                <td>溶解度</td>
+                <td>{{message.Solubility}}</td>
+            </tr>
+            <tr>
+                <td>密度</td>
+                <td>{{message.Density}}</td>
+            </tr>
+            <tr>
+                <td>蒸气压</td>
+                <td>{{message.Vapor_Pressure}}</td>
+            </tr>
+            <tr>
+                <td>数据库日志</td>
+                <td>{{message.Database_Log}}</td>
+            </tr>
+            <tr>
+                <td>稳定性</td>
+                <td>{{message.Stability}}</td>
+            </tr>
+            <tr>
+                <td>保质期</td>
+                <td>{{message.Shelf_Life}}</td>
+            </tr>
+            <tr>
+                <td>分解</td>
+                <td>{{message.Decomposition}}</td>
+            </tr>
+            <tr>
+                <td>解离常数</td>
+                <td>{{message.Dissociation_Constants}}</td>
+            </tr>
+            <tr>
+                <td>碰撞横截面</td>
+                <td>{{message.Collision_Cross_Section}}</td>
+            </tr>
+            <tr>
+                <td>Kovats_保留指数</td>
+                <td>{{message.Kovats_Retention_Index}}</td>
+            </tr>
+            <tr>
+                <td>分子量</td>
+                <td>{{message.Molecular_Weight}}</td>
+            </tr>
+            <tr>
+                <td>其他实验性质</td>
+                <td>{{message.Other_Experimental_Properties}}</td>
+            </tr>
+            <tr>
+                <td>SpringerMaterials_属性</td>
+                <td>{{message.SpringerMaterials_Properties}}</td>
+            </tr>
+            <tr>
+                <td>化学类别</td>
+                <td>{{message.Chemical_Classes}}</td>
+            </tr>
+            <tr>
+                <td>药物</td>
+                <td>{{message.Drugs}}</td>
+            </tr>
+            <tr>
+                <td>人用药物</td>
+                <td>{{message.Human_Drugs}}</td>
+            </tr>
+            <tr>
+                <td>动物药品</td>
+                <td>{{message.Animal_Drugs}}</td>
+            </tr>
+            <tr>
+                <td>一维核磁共振波谱</td>
+                <td>{{message.te_1D_NMR_Spectra}}</td>
+            </tr>
+            <tr>
+                <td>2D_NMR_波谱</td>
+                <td>{{message.te_2D_NMR_Spectra}}</td>
+            </tr>
+            <tr>
+                <td>质谱法</td>
+                <td>{{message.Mass_Spectrometry}}</td>
+            </tr>
+            <tr>
+                <td>紫外光谱</td>
+                <td>{{message.UV_Spectra}}</td>
+            </tr>
+            <tr>
+                <td>红外光谱</td>
+                <td>{{message.IR_Spectra}}</td>
+            </tr>
+            <tr>
+                <td>拉曼光谱</td>
+                <td>{{message.Raman_Spectra}}</td>
+            </tr>
+            <tr>
+                <td>其他光谱</td>
+                <td>{{message.Other_Spectra}}</td>
+            </tr>
+            <tr>
+                <td>相关化合物</td>
+                <td>{{message.Related_Compounds}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
