@@ -138,8 +138,8 @@ python manage.py runserver
 ```
 
 6. **访问应用**
-- 前端界面: /Chemai_data/
-- 后台管理: /admin/
+- 前端界面: http://127.0.0.1:8000/Chemai_data/
+- 后台管理: http://127.0.0.1:8000/admin/
 
 ## 使用说明
 
