@@ -62,10 +62,10 @@
             {% if message %}
                 {% for row in message %}
                     <tr>
-                        <td style="text-align: center;"><img src="http://127.0.0.1:8000/media/{{ row.photo }}" alt="Big Boat" width="150" height="120" ></td>
+                        <td style="text-align: center;"><img src="http://10.20.1.111:25925/media/{{ row.photo }}" alt="Big Boat" width="150" height="120" ></td>
                         <td style="text-align: center;">{{row.Molecular_Formla }}</td>
-                        <td style="text-align: center;"><a href ="http://127.0.0.1:8000/Chemai_data/Search_Chem_Database/Search_sm/{{row.InchIkey}}/" |safe> {{ row.InchIkey}}</a></td>
-                        <td style="text-align: center;"><a href ="http://127.0.0.1:8000/Chemai_data/Search_Chem_Database/Search_de/{{row.InchIkey}}/" |safe target="_blank" > 更多信息</a></td>
+                        <td style="text-align: center;"><a href ="http://10.20.1.111:25925/Chemai_data/Search_Chem_Database/Search_sm/{{row.InchIkey}}/" |safe> {{ row.InchIkey}}</a></td>
+                        <td style="text-align: center;"><a href ="http://10.20.1.111:25925/Chemai_data/Search_Chem_Database/Search_de/{{row.InchIkey}}/" |safe target="_blank" > 更多信息</a></td>
                     </tr>
                 {% endfor %}
             {% else %}

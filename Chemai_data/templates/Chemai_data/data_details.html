@@ -62,10 +62,10 @@
             {% if simil %}
                 {% for row in simil %}
                     <tr>
-                        <td style="text-align: center;"><img src="http://127.0.0.1:8000/media/{{ row.similarity_photo }}" alt="Big Boat" width="150" height="120" ></td>
+                        <td style="text-align: center;"><img src="http://10.20.1.111:25925/media/{{ row.similarity_photo }}" alt="Big Boat" width="150" height="120" ></td>
                         <td style="text-align: center;">相似率:    {{ row.similarity_data }} </td>
-                        <td style="text-align: center;"><a href ="http://127.0.0.1:8000/Chemai_data/Search_Chem_Database/Search/{{row.similarity_title}}/" |safe> {{ row.similarity_mol}}</a></td>
-                        <td style="text-align: center;"><a href ="http://127.0.0.1:8000/Chemai_data/Search_Chem_Database/Search_de/{{row.similarity_title}}/" |safe target="_blank" > 更多信息</a></td>
+                        <td style="text-align: center;"><a href ="http://10.20.1.111:25925/Chemai_data/Search_Chem_Database/Search/{{row.similarity_title}}/" |safe> {{ row.similarity_mol}}</a></td>
+                        <td style="text-align: center;"><a href ="http://10.20.1.111:25925/Chemai_data/Search_Chem_Database/Search_de/{{row.similarity_title}}/" |safe target="_blank" > 更多信息</a></td>
                     </tr>
                 {% endfor %}
             {% else %}
