@@ -5,91 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>化学数据库</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .function-list {
-            list-style: none;
             padding: 0;
+            box-sizing: border-box;
         }
-        
-        .function-list li {
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
         }
-        
-        .function-list li:last-child {
-            border-bottom: none;
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
         }
-        
-        .function-list a {
-            display: block;
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 3px;
-            transition: background-color 0.3s;
-        }
-        
-        .function-list a:hover {
-            background-color: #0056b3;
-        }
-        
-        .admin-link {
+
+        .header {
             text-align: center;
-            margin-top: 30px;
+            margin-bottom: 3rem;
         }
-        
-        .admin-link a {
+
+        .header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .function-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .function-item {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .function-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .function-item a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .function-item:hover a {
+            color: #667eea;
+        }
+
+        .admin-section {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+
+        .admin-section a {
             color: #666;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
         }
-        
-        .admin-link a:hover {
-            text-decoration: underline;
+
+        .admin-section a:hover {
+            background: #e9ecef;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .function-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>化学数据库</h1>
-        
-        <ul class="function-list">
-            {% if latest_question_list %}
-                {% for question in latest_question_list %}
-                    <li>
-                        <a href="{{ question.ans_text|default:'#' }}">{{ question.question_text }}</a>
-                    </li>
-                {% endfor %}
-            {% else %}
-                <li><a href="#">系统维护中</a></li>
-            {% endif %}
-        </ul>
-        
-        <div class="admin-link">
-            <a href="/admin/">管理后台</a>
+        <div class="header">
+            <h1>化学数据库</h1>
+            <p>专业的化学分子数据管理平台</p>
+        </div>
+
+        <div class="card">
+            <div class="function-grid">
+                {% if latest_question_list %}
+                    {% for question in latest_question_list %}
+                        <div class="function-item">
+                            <a href="{{ question.ans_text|default:'#' }}">{{ question.question_text }}</a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="function-item">
+                        <a href="#">系统维护中</a>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="admin-section">
+                <a href="/admin/">管理后台</a>
+            </div>
         </div>
     </div>
 </body>
