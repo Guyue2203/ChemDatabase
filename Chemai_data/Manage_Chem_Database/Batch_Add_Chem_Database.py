@@ -1,9 +1,22 @@
 from Chemai_data.models import Chem_Database #Chem_Database.Chem_mol
 import csv
-import pubchempy as pcp
-from rdkit import Chem
-from rdkit.Chem import Draw
-from rdkit.Chem import inchi
+
+# 可选依赖导入
+try:
+    import pubchempy as pcp
+    PUBCHEMPY_AVAILABLE = True
+except ImportError:
+    PUBCHEMPY_AVAILABLE = False
+    print("警告: pubchempy 未安装，某些功能可能不可用")
+
+try:
+    from rdkit import Chem
+    from rdkit.Chem import Draw
+    from rdkit.Chem import inchi
+    RDKIT_AVAILABLE = True
+except ImportError:
+    RDKIT_AVAILABLE = False
+    print("警告: rdkit 未安装，某些功能可能不可用")
 # 读取 CSV 文件并转换为列表
 def csv_to_list(filename):
     data_list = []

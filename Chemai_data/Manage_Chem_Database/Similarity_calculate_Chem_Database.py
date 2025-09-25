@@ -1,6 +1,13 @@
 from Chemai_data.models import Similarity_data #Similarity_data.Sim
-from rdkit import Chem
-from rdkit.Chem import rdMolDescriptors, DataStructs
+
+# 可选依赖导入
+try:
+    from rdkit import Chem
+    from rdkit.Chem import rdMolDescriptors, DataStructs
+    RDKIT_AVAILABLE = True
+except ImportError:
+    RDKIT_AVAILABLE = False
+    print("警告: rdkit 未安装，某些功能可能不可用")
 
 # 计算两个分子间的Tanimoto相似度
 def calculate_similarity(smiles1, smiles2):

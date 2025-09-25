@@ -2,8 +2,15 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from Chemai_data.models import Chem_Database #Chem_Database.Chem_mol
 #from Chemai_data.models import Similarity_data    Similarity_data.Sim
-from rdkit import Chem
-from rdkit.Chem import inchi
+
+# 可选依赖导入
+try:
+    from rdkit import Chem
+    from rdkit.Chem import inchi
+    RDKIT_AVAILABLE = True
+except ImportError:
+    RDKIT_AVAILABLE = False
+    print("警告: rdkit 未安装，某些功能可能不可用")
 # 接收前端用户请求数据用于搜索
 def search(request,q_canshu):
     request.encoding = 'utf-8'
