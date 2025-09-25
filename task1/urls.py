@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include,path
 from django.urls import re_path as url
+from django.views.generic import RedirectView
 from Chemai_data.views import Back_end_See_File
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,6 +24,7 @@ from django.views.static import serve
 from task1.settings import MEDIA_ROOT
 urlpatterns = [
     path("", include("Chemai_data.urls")), #前端界面
+    path("favicon.ico", RedirectView.as_view(url="/static/icon_chemai.png")),#favicon.ico
     path("Chemai_data/", include("Chemai_data.urls")),#项目路径跳转
     url('admin/', admin.site.urls),#后端界面
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),#后端实现文件存储
