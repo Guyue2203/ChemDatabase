@@ -22,10 +22,12 @@ from django.conf.urls.static import static
 from django.views.static import serve
 from task1.settings import MEDIA_ROOT
 urlpatterns = [
+    path("", include("Chemai_data.urls")), #前端界面
     path("Chemai_data/", include("Chemai_data.urls")),#项目路径跳转
     url('admin/', admin.site.urls),#后端界面
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),#后端实现文件存储
     url(r'admin/Chemai_data/Files/Chemai_data', Back_end_See_File.get_file),#后端界面文件预览
-    url(r'^video/', include("Chemai_data.urls")),#本地文件访问链接
+    # 移除重复的include，避免命名空间冲突
+    # url(r'^video/', include("Chemai_data.urls")),#本地文件访问链接
 
 ]

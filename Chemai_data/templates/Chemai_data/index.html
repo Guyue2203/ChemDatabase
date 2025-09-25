@@ -1,19 +1,247 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>一个数据搜索网站的前端</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemDatabase - 化学数据库管理系统</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .feature-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav {
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/Chemai_data/" class="logo">
+                    <i class="fas fa-flask"></i> ChemDatabase
+                </a>
+                <nav class="nav">
+                    <a href="/Chemai_data/">首页</a>
+                    <a href="/admin/">管理</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-    {% if latest_question_list %}
-        <ul>
-        {% for question in latest_question_list %}
-            <li><a href = "{{ question.ans_text|default:'#' }}" target="_blank" >{{ question.question_text}}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No newsreport are available.</p>
-    {% endif %}
+    <main class="main-content">
+        <div class="container">
+            <div class="hero">
+                <h1>化学数据库管理系统</h1>
+                <p>专业的化学分子数据管理、搜索和分析平台</p>
+                
+                <div class="features-grid">
+                    {% if latest_question_list %}
+                        {% for question in latest_question_list %}
+                            <div class="feature-card">
+                                {% if "图像转分子" in question.question_text %}
+                                    <div class="feature-icon"><i class="fas fa-microscope"></i></div>
+                                    <h3>{{ question.question_text }}</h3>
+                                    <p>通过分子结构图像识别和转换分子信息</p>
+                                {% elif "数据提交" in question.question_text %}
+                                    <div class="feature-icon"><i class="fas fa-upload"></i></div>
+                                    <h3>{{ question.question_text }}</h3>
+                                    <p>上传和管理化学分子数据</p>
+                                {% elif "搜索" in question.question_text %}
+                                    <div class="feature-icon"><i class="fas fa-search"></i></div>
+                                    <h3>{{ question.question_text }}</h3>
+                                    <p>快速搜索和查询化学分子信息</p>
+                                {% elif "后端管理" in question.question_text %}
+                                    <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+                                    <h3>{{ question.question_text }}</h3>
+                                    <p>系统管理和数据维护</p>
+                                {% else %}
+                                    <div class="feature-icon"><i class="fas fa-atom"></i></div>
+                                    <h3>{{ question.question_text }}</h3>
+                                    <p>化学数据库功能</p>
+                                {% endif %}
+                                <a href="{{ question.ans_text|default:'#' }}" class="feature-link">
+                                    立即使用 <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-info-circle"></i></div>
+                            <h3>系统维护中</h3>
+                            <p>系统正在维护，请稍后再试</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 ChemDatabase. 专业的化学数据库管理系统</p>
+        </div>
+    </footer>
 </body>
 </html>
