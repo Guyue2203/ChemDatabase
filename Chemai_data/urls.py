@@ -7,7 +7,7 @@ from .Manage_Chem_Database import Add_Test_Chem_Database,Batch_Add_Chem_Database
     Similarity_calculate_Chem_Database,To_CSV_Test_Chem_Database
 from .views import Back_end_See_File
 
-app_name = "newsreport"
+app_name = "Chemai_data"
 urlpatterns = [
     path("", Index.index, name="index"), #前端界面
     path("stru/", Index.stru, name="stru"), #图像界面
